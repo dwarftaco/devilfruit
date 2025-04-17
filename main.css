@@ -174,10 +174,13 @@ section p {
     display: flex;
     flex-direction: row;
     gap: 20px;
+    padding: 0rem 1rem;
+    width: 50%;
+    justify-content: center;
 }
 
 .dropdown-button {
-    width: 12rem;
+    width: 100%;
     padding: 12px 20px;
     background-color: #FFFFFF;
     border-radius: 4px;
@@ -202,6 +205,7 @@ section p {
 .dropdown {
     position: relative;
     display: inline-block;
+    flex: 1;
 }
 
 .dropdown-content {
@@ -313,6 +317,7 @@ input[type=text], select {
     border-radius: 5px;
     border: 1px solid #DDDDDD;
     max-width: 50%;
+    min-width: 200px;
 }
 
 .card h1 {
@@ -447,6 +452,10 @@ p {
         margin-right: 0rem;
         max-width: 90%;
     }
+
+    .filter {
+        width: 75%;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -454,5 +463,9 @@ p {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+    }
+
+    .filter {
+        width: 100%;
     }
 }
