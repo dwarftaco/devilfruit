@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Devil Fruit</title>
+        <link rel="stylesheet" href="main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <meta name="view-transition" content="same-origin">
+        <script src="jquery.min.js"></script>
+        <script src="index.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+    </head>
+    <body>
+        <header>
+            <div class="title">
+                <img id="logo" src="assets/images/logo.svg"/>
+                <h1>Random Devil Fruit</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a class="current" href="index.html">Random</a></li>
+                    <li><a href="encyclopedia.html">Encyclopedia</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="transparent">
+                <h1>Claim your devil fruit</h1>
+                <div class="filter">
+                    <div class="dropdown">
+                        <button
+                                class="dropdown-button"><div class="label">Type</div><img
+                                src="assets/images/arrow.svg"/></button>
+                        <div class="dropdown-content">
+                            <a class="dropdown-item">
+                                <input id="filter-type-paramecia" type="checkbox" checked="checked"/>
+                                <span class="checkbox-label">Paramecia</span>
+                            </a>
+                            <a class="dropdown-item">
+                                <input id="filter-type-zoan" type="checkbox" checked="checked"/>
+                                <span class="checkbox-label">Zoan</span>
+                            </a>
+                            <a class="dropdown-item">
+                                <input id="filter-type-logia" type="checkbox" checked="checked"/>
+                                <span class="checkbox-label">Logia</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button
+                                class="dropdown-button"><div class="label">Canon</div><img
+                                src="assets/images/arrow.svg"/></button>
+                        <div class="dropdown-content">
+                            <a class="dropdown-item">
+                                <input id="filter-canon-canon" type="checkbox" checked="checked"/>
+                                <div class="checkbox-label">Canon</div>
+                            </a>
+                            <a class="dropdown-item">
+                                <input id="filter-canon-noncanon" type="checkbox"/>
+                                <div class="checkbox-label">Non-Canon</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="randomDevilFruit()">Take A Bite</button>
+                <div id="devil-fruit-card" class="card" style="display: none;">
+                    <img id="devil-fruit-img" onerror="this.src='assets/images/unknown_0.svg'">
+                    <h1 id="devil-fruit-name"></h1>
+                    <h2 id="devil-fruit-type"></h2>
+                    <p id="devil-fruit-desc"></p>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&#169; 2025 Random Devil Fruit</p>
+        </footer>
+    </body>
+</html>

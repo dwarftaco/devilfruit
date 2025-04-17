@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Random Devil Fruit</title>
+        <link rel="stylesheet" href="main.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <meta name="view-transition" content="same-origin">
+        <script src="jquery.min.js"></script>
+        <script src="encyclopedia.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="title">
+                <img src="assets/images/logo.svg"/>
+                <h1>Random Devil Fruit</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Random</a></li>
+                    <li><a class="current" href="encyclopedia.html">Encyclopedia</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section>
+                <h1>The Complete Devil Fruit Encyclopedia</h1>
+                <input type="text" id="myInput" onkeyup="filterFruits()" placeholder="Search...">
+                <div class="filter" onclick="filterFruits()">
+                    <div class="dropdown">
+                        <button
+                                class="dropdown-button"><div class="label">Type</div><img
+                                src="assets/images/arrow.svg"/></button>
+                        <div class="dropdown-content">
+                            <a class="dropdown-item">
+                                <input id="filter-type-paramecia" type="checkbox" checked="checked"/>
+                                <span class="checkbox-label">Paramecia</span>
+                            </a>
+                            <a class="dropdown-item">
+                                <input id="filter-type-zoan" type="checkbox" checked="checked"/>
+                                <span class="checkbox-label">Zoan</span>
+                            </a>
+                            <a class="dropdown-item">
+                                <input id="filter-type-logia" type="checkbox" checked="checked"/>
+                                <span class="checkbox-label">Logia</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
+                        <button
+                                class="dropdown-button"><div class="label">Canon</div><img
+                                src="assets/images/arrow.svg"/></button>
+                        <div class="dropdown-content">
+                            <a class="dropdown-item">
+                                <input id="filter-canon-canon" type="checkbox" checked="checked"/>
+                                <div class="checkbox-label">Canon</div>
+                            </a>
+                            <a class="dropdown-item">
+                                <input id="filter-canon-noncanon" type="checkbox" checked="checked"/>
+                                <div class="checkbox-label">Non-Canon</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <p id="total-fruits"></p>
+                <div id="encyclopedia" class="encyclopedia"></div>
+            </section>
+        </main>
+        <footer>
+            <p>&#169; Copyright 2025</p>
+        </footer>
+    </body>
+</html>

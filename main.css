@@ -1,0 +1,458 @@
+:root {
+    --main: hsl(0, 0%, 13%);
+    --accent: #6B74BB;
+    --fancy: #CA9C6A;
+}
+
+@font-face {
+    font-family: "Poneglyph";
+    src: url("assets/Poneglyph.ttf");
+}
+
+html {
+    height: 100%;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    position: relative;
+    font-size: 14px;
+    line-height: 1.5;
+    margin: 0;
+    min-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #F9F9F5;
+    overflow-y: scroll;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("assets/images/swirls.png");
+    background-repeat: repeat;
+    background-size: 150px;
+    opacity: 0.025;
+    z-index: -1;
+}
+
+header {
+    padding: 1rem 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .title {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+}
+
+header .title h1 {
+    font-size: 1.2rem;
+    color: #333333;
+}
+
+header img {
+    height: 50px;
+    padding-right: 15px;
+}
+
+#logo {
+    cursor: pointer;
+}
+
+header li:hover {
+    transform: translate(0, -1px);
+    filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.1)); 
+}
+
+header nav a {
+    color: #333333;
+    text-decoration: none;
+}
+
+nav {
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav li .current {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+section {
+    /* padding: 10px 40px; */
+    margin: 3rem 2rem 1rem 2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+section button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 0.3rem;
+    width: 10rem;
+    height: 3rem;
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+    transition: .3s;
+    cursor: pointer;
+}
+
+section button:hover {
+    background-color: #565d96;
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.2));
+}
+
+section button svg {
+    height: auto;
+    max-width: 70px;
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+    transition: transform .3s ease-out;
+}
+
+section button svg:hover {
+    transform: translate(0, -3px);
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.15));
+}
+
+.impact {
+    background-color: var(--accent);
+}
+
+section h1 {
+    text-align: center;
+    /*font-size: 2em;*/
+    line-height: 1.1;
+}
+
+section > h1 {
+    margin: 0.5rem;
+}
+
+section h2 {
+    text-align: center;
+    /*font-size: 1.5em;*/
+    line-height: 1.1;
+    margin: 0 0 0.5rem 0;
+}
+
+section h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+section p {
+    text-align: center;
+    /*font-size: 1.25em;*/
+    line-height: 1.4;
+}
+
+.filter {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.dropdown-button {
+    width: 12rem;
+    padding: 12px 20px;
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #CCCCCC;
+
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    font-family: "Inter", sans-serif;
+}
+
+.dropdown-button img {
+    max-width: 12px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #F9F9F9;
+    min-width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border: 1px solid #DDDDDD;
+    z-index: 1;
+}
+
+.dropdown-content .dropdown-item {
+    color: black;
+    padding: 6px 16px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+}
+
+.dropdown-content .dropdown-item .checkbox-label {
+    padding-left: 5px;
+}
+
+.dropdown-content a:hover {
+    background-color: #F1F1F1
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropdown-button {
+    background-color: #F1F1F1;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+input[type=text], select {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+.fruits {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#devil-fruit-card {
+    margin-top: 1rem;
+}
+
+#devil-fruit-img {
+    max-height: 10rem;
+}
+
+#devil-fruit-info {
+    display: flex;
+    flex-direction: row;
+    gap: 0.75rem;
+}
+
+.encyclopedia {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem 1rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.encyclopedia>div {
+    width: 200px;
+}
+
+.encyclopedia img {
+    max-height: 100px;
+    max-width: 90px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 2rem 2rem 1rem 2rem;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    max-width: 50%;
+}
+
+.card h1 {
+    font-size: 1.3rem;
+    color: #333333;
+    margin-bottom: 0.4rem;
+}
+
+.card h2 {
+    font-size: 1.1rem;
+    color: #777777;
+    font-weight: 500;
+}
+
+/*.card p {
+    font-size: 1rem;
+}*/
+
+.encyclopedia .card {
+    padding: 1rem 1rem 0.5rem 1rem;
+}
+
+#total-fruits {
+    margin-bottom: 0;
+}
+
+footer {
+    padding: 1rem;
+    margin-top: auto;
+}
+
+footer p {
+    color: #BABABA;
+    text-align: center;
+    font-size: 0.85rem;
+}
+
+@keyframes turn {
+  from { transform: rotate3d(0, 0, 0, 0); }
+  to { transform: rotate3d(0, 1, 0, 360deg); }
+}
+
+.container {
+  width: 200px;
+  height: 200px;
+  perspective: 600px;
+  margin: 100px;
+  transform: translateX(-10px);
+}
+
+.cube {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  transform-style: preserve-3d;
+  animation: turn 60s linear infinite;
+}
+
+.face {
+  width: 200px;
+  height: 200px;
+  background: url("assets/images/poneglyph.png");
+  background-size: contain;
+  border: 2px solid #451C20;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 500ms;
+
+  color: rgba(0,0,0,0.6);
+  font-family: "Poneglyph";
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+  word-break: break-all;
+  text-align: center;
+  padding: 10px;
+  box-shadow: inset 0px 0px 20px 20px rgba(0,0,0,0.25);
+}
+
+.front {
+  transform: translateZ(110px);
+}
+
+.face.back {
+  transform: translateZ(-110px) rotateY(180deg);
+  background: url("assets/images/poneglyph_back.png");
+  background-size: contain;
+}
+
+.left {
+  transform: translateX(-110px) rotateY(-90deg);
+}
+
+.right {
+  transform: translateX(110px) rotateY(90deg);
+}
+
+.top {
+  transform: translateY(-110px) rotateX(90deg);
+}
+
+.bottom {
+  transform: translateY(110px) rotateX(-90deg);
+}
+
+svg {
+    fill: var(--main);
+}
+
+hr {
+    border: 1px solid rgb(0, 0, 0, 0.2);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    color: rgb(52, 52, 52, 0.9);
+    font-family: "Inter", sans-serif;
+}
+
+p {
+    size: 16px;
+    line-height: 1.5;
+    color: rgb(33, 33, 33, 0.99);
+}
+
+@media only screen and (max-width: 780px) {
+    .card {
+        margin-left: 0rem;
+        margin-right: 0rem;
+        max-width: 90%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    header {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
