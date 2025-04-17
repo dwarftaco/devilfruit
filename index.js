@@ -49,7 +49,7 @@ function randomDevilFruit() {
     var filteredDevilFruits = getFilteredList([document.getElementById("devil-fruit-name").innerHTML]);
     var randomDevilFruit = getRandomInt(filteredDevilFruits.length);
     document.getElementById("devil-fruit-img").src = "assets/images/fruits/" + filteredDevilFruits[randomDevilFruit]
-    .image;
+    .image.toLowerCase();
     document.getElementById("devil-fruit-name").innerHTML = filteredDevilFruits[randomDevilFruit].name;
 
     var type = filteredDevilFruits[randomDevilFruit].subtype == "" ?

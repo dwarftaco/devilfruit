@@ -27,6 +27,7 @@ function loadFruits() {
 		// outputs the card if it is valid
         if (valid) {
 			var card = '<div class="card" id="fruit-' + i + '">' + '<img src="assets/images/fruits/' + f.image
+			.toLowerCase()
 			    + '" onerror="this.src=' + "'" + getRandomDefault(f.name) + "'" + ';" alt="' + f.title + '">'
 			card += '<h1 class="name">' + f.name + '</h1>';
 
