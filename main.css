@@ -67,10 +67,6 @@ header img {
     padding-right: 15px;
 }
 
-#logo {
-    cursor: pointer;
-}
-
 header li:hover {
     transform: translate(0, -1px);
     filter: drop-shadow(2px 2px 1px rgba(0,0,0,0.1)); 

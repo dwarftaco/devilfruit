@@ -20,6 +20,8 @@ function getRandomDefault(str) {
 function loadFruits() {
 	$("#encyclopedia").empty();
 
+	document.getElementById("encyclopedia").style.display = "none";
+
 	var counter = 0;
 	$.each(devilFruits, function(i,f) {
 		var valid = true;
@@ -48,8 +50,10 @@ function loadFruits() {
 			counter += 1;
 		}
     });
-	
-	document.getElementById("total-fruits").innerHTML = "Showing " + counter + " fruits";
+
+	filterFruits();
+
+	document.getElementById("encyclopedia").style.display = "flex";
 }
 
 function filterFruits() {
@@ -87,8 +91,8 @@ function getFilteredList() {
     var zoanFilter = document.getElementById("filter-type-zoan").checked;
     var logiaFilter = document.getElementById("filter-type-logia").checked;
 
-    var canonFilter = document.getElementById("filter-canon-canon").checked;
-    var nonCanonFilter = document.getElementById("filter-canon-noncanon").checked;
+    var canonFilter = document.getElementById("filter-source-canon").checked;
+    var spoilerFilter = document.getElementById("filter-source-spoiler").checked;
 
     devilFruits.forEach((fruit) => {
         if (fruit.type == "Paramecia" && !parameciaFilter) {
@@ -97,9 +101,9 @@ function getFilteredList() {
             return;
         } else if (fruit.type == "Logia" && !logiaFilter) {
             return;
-        } else if (fruit.canon  && !canonFilter) {
+        } else if (!fruit.canon && canonFilter) {
             return;
-        } else if (!fruit.canon  && !nonCanonFilter) {
+        } else if (fruit.spoiler && !spoilerFilter) {
             return;
         }
 

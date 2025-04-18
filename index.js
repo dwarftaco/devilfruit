@@ -17,8 +17,8 @@ function getFilteredList(exclusionList) {
     var zoanFilter = document.getElementById("filter-type-zoan").checked;
     var logiaFilter = document.getElementById("filter-type-logia").checked;
 
-    var canonFilter = document.getElementById("filter-canon-canon").checked;
-    var nonCanonFilter = document.getElementById("filter-canon-noncanon").checked;
+    var canonFilter = document.getElementById("filter-source-canon").checked;
+    var spoilerFilter = document.getElementById("filter-source-spoiler").checked;
 
     devilFruits.forEach((fruit) => {
         if (fruit.type == "Paramecia" && !parameciaFilter) {
@@ -27,10 +27,10 @@ function getFilteredList(exclusionList) {
             return;
         } else if (fruit.type == "Logia" && !logiaFilter) {
             return;
-        } else if (fruit.canon  && !canonFilter) {
+        } else if (!fruit.canon && canonFilter) {
             return;
-        } else if (!fruit.canon  && !nonCanonFilter) {
-            return;
+        } else if (fruit.spoiler && !spoilerFilter) {
+          return;
         }
 
         for (var i = 0; i < exclusionList.length; i++) {

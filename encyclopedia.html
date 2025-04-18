@@ -1,18 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <title>Random Devil Fruit</title>
+        <title>One Piece Devil Fruit Encyclopedia - DevilFruit.io</title>
         <link rel="stylesheet" href="main.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="view-transition" content="same-origin">
+        <meta name="description" content="The Complete One Piece Devil Fruit Encyclopedia">
+        <meta name="keywords" content="One Piece,devil fruits,devil fruit,encyclopedia,wiki">
+        <meta property="og:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io" />
+        <meta property="og:description" content="The Complete One Piece Devil Fruit Encyclopedia" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.devilfruit.io/encyclopedia" />
+        <meta property="og:image" content="https://www.devilfruit.io/assets/images/logo.png" />
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io">
+        <meta name="twitter:description" content="The Complete One Piece Devil Fruit Encyclopedia">
+        <meta name="twitter:image" content="https://www.devilfruit.io/assets/images/logo.png">
         <script src="jquery.min.js"></script>
         <script src="encyclopedia.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
     </head>
     <body>
         <header>
             <div class="title">
-                <img src="assets/images/logo.svg"/>
-                <h1>Random Devil Fruit</h1>
+                <img src="assets/images/logo.svg" alt="logo"/>
+                <h1>DevilFruit.io</h1>
             </div>
             <nav>
                 <ul>
@@ -47,16 +64,16 @@
                     </div>
                     <div class="dropdown">
                         <button
-                                class="dropdown-button"><div class="label">Canon</div><img
+                                class="dropdown-button"><div class="label">Source</div><img
                                 src="assets/images/arrow.svg"/></button>
                         <div class="dropdown-content">
                             <a class="dropdown-item">
-                                <input id="filter-canon-canon" type="checkbox" checked="checked"/>
-                                <div class="checkbox-label">Canon</div>
+                                <input id="filter-source-canon" type="checkbox"/>
+                                <div class="checkbox-label">Canon Only</div>
                             </a>
                             <a class="dropdown-item">
-                                <input id="filter-canon-noncanon" type="checkbox" checked="checked"/>
-                                <div class="checkbox-label">Non-Canon</div>
+                                <input id="filter-source-spoiler" type="checkbox"/>
+                                <div class="checkbox-label">Spoiler</div>
                             </a>
                         </div>
                     </div>
@@ -66,7 +83,7 @@
             </section>
         </main>
         <footer>
-            <p>&#169; Copyright 2025</p>
+            <p>&#169; 2025 DevilFruit.io</p>
         </footer>
     </body>
 </html>
