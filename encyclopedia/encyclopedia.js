@@ -1,6 +1,6 @@
 var devilFruits = [];
 
-$.getJSON("assets/fruits.json", function(json) {
+$.getJSON("../assets/fruits.json", function(json) {
     for(var i = 0; i < json.length; i++) {
     	devilFruits.push(json[i]);
 	}
@@ -14,7 +14,7 @@ function getRandomDefault(str) {
         sum += str.charCodeAt(i);
     }
 
-    return "assets/images/unknown_" + (sum % 4).toString() + ".svg";
+    return "../assets/images/unknown_" + (sum % 4).toString() + ".svg";
 }
 
 function loadFruits() {
@@ -28,7 +28,7 @@ function loadFruits() {
 		
 		// outputs the card if it is valid
         if (valid) {
-			var card = '<div class="card" id="fruit-' + i + '">' + '<img src="assets/images/fruits/' + f.image
+			var card = '<div class="card" id="fruit-' + i + '">' + '<img src="../assets/images/fruits/' + f.image
 			.toLowerCase()
 			    + '" onerror="this.src=' + "'" + getRandomDefault(f.name) + "'" + ';" alt="' + f.title + '">'
 			card += '<h1 class="name">' + f.name + '</h1>';
