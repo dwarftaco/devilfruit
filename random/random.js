@@ -6,6 +6,24 @@ $.getJSON("../assets/fruits.json", function(json) {
 	}
 });
 
+var currentDevilFruit = null;
+
+document.addEventListener("languageUpdateEvent", (event) => {
+  if (currentDevilFruit != null) {
+    loadName();
+  }
+});
+
+document.addEventListener("spoilerUpdateEvent", (event) => {
+    document.getElementById("filter-source-spoiler").checked = getCookie("showSpoilers") == "true";
+});
+
+document.addEventListener("canonUpdateEvent", (event) => {
+  if (currentDevilFruit != null) {
+    loadImage();
+  }
+});
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
@@ -48,9 +66,11 @@ function getFilteredList(exclusionList) {
 function randomDevilFruit() {
     var filteredDevilFruits = getFilteredList([document.getElementById("devil-fruit-name").innerHTML]);
     var randomDevilFruit = getRandomInt(filteredDevilFruits.length);
-    document.getElementById("devil-fruit-img").src = "../assets/images/fruits/" + filteredDevilFruits[randomDevilFruit]
-    .image.toLowerCase();
-    document.getElementById("devil-fruit-name").innerHTML = filteredDevilFruits[randomDevilFruit].name;
+
+    currentDevilFruit = filteredDevilFruits[randomDevilFruit];
+
+    loadImage();
+    loadName();
 
     var type = filteredDevilFruits[randomDevilFruit].subtype == "" ?
         filteredDevilFruits[randomDevilFruit].type : filteredDevilFruits[randomDevilFruit].subtype;
@@ -59,4 +79,21 @@ function randomDevilFruit() {
     document.getElementById("devil-fruit-desc").innerHTML = filteredDevilFruits[randomDevilFruit].description;
 
     document.getElementById("devil-fruit-card").style.display = "flex";
+}
+
+function loadName() {
+    document.getElementById("devil-fruit-name").innerHTML = getCookie("language") != "english" ? currentDevilFruit.name : currentDevilFruit.english_name;
+}
+
+function loadImage() {
+    if (currentDevilFruit.canon_image || getCookie("showOnlyCanon") != "true") {
+        document.getElementById("devil-fruit-img").src = "../assets/images/fruits/" + currentDevilFruit.image.toLowerCase();
+    } else {
+        document.getElementById("devil-fruit-img").src = "../assets/images/fruits/invalid.png";
+    }
+}
+
+function openWiki() {
+    var url = currentDevilFruit.wiki_override != "" ? currentDevilFruit.wiki_override : "https://onepiece.fandom.com/wiki/" + currentDevilFruit.name.replace(" ", "_");
+    window.open(url, '_blank').focus();
 }

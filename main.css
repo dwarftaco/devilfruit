@@ -89,6 +89,7 @@ nav ul {
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 1.5rem;
 }
 
@@ -99,6 +100,23 @@ nav li {
 nav li .current {
     font-weight: 500;
     text-decoration: underline;
+}
+
+#toggle-settings {
+    border: none;
+    background: none;
+    padding: 0;
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+}
+
+#toggle-settings svg {
+    fill: #666666;
+    height: 20px;
+    width: 20px;
 }
 
 section {
@@ -330,7 +348,15 @@ input[type=text], select {
 
 .encyclopedia img {
     max-height: 100px;
-    max-width: 90px;
+    max-width: 100px;
+}
+
+.encyclopedia .img-container {
+    height: 100px;
+    height: 90px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
 }
 
 .card {
@@ -365,6 +391,25 @@ input[type=text], select {
 .encyclopedia .card {
     padding: 1rem 1rem 0.5rem 1rem;
 }
+
+.wiki-link {
+    align-self: flex-end;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.wiki-link:hover {
+    transform: translateY(-1px);
+}
+
+.wiki-link svg {
+    fill: #777777;
+    height: 20px;
+    width: 20px;
+}
+
 
 #total-fruits {
     margin-bottom: 0;
@@ -437,6 +482,101 @@ footer p {
 .cube__face--left   { transform: rotateY(-90deg) translateZ(100px); }
 .cube__face--top    { transform: rotateX( 90deg) translateZ(100px); }
 .cube__face--bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+#settings {
+    position: fixed;
+    width: 225px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid #DEDEDE;
+    filter: drop-shadow(2px 4px 3px rgba(0, 0, 0, 0.1));
+
+    padding: 2rem;
+    border-radius: 0.5rem;
+
+    display: none;
+    flex-direction: column;
+    justify-items: center;
+    gap: 1rem;
+
+    font-family: "Inter", sans-serif;
+    z-index: 2;
+}
+
+#settings .switch {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+#settings .switch button {
+    width: 7rem;
+    height: 2.5rem;
+    border-radius: 5rem;
+    background-color: #DEDEDE;
+    border: none;
+    font-weight: 500;
+
+    transition: .3s;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+
+    color: #777777;
+}
+
+#settings .switch button.selected {
+    background-color: white;
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+    color: #000000;
+}
+
+#settings .checkbox {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#settings > p {
+    font-size: 0.7rem;
+    color: #888888;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+#settings-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#settings-close {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+
+    background: none;
+    border: none;
+}
+
+#settings-close svg {
+    width: 20px;
+    height: 20px;
+    fill: #777777;
+}
+
+#settings h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 1.25rem;
+}
 
 svg {
     fill: var(--main);

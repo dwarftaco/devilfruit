@@ -8,6 +8,20 @@ $.getJSON("../assets/fruits.json", function(json) {
     loadFruits();
 });
 
+document.addEventListener("languageUpdateEvent", (event) => {
+    loadNames();
+});
+
+document.addEventListener("spoilerUpdateEvent", (event) => {
+    document.getElementById("filter-source-spoiler").checked = getCookie("showSpoilers") == "true";
+    loadFruits();
+});
+
+document.addEventListener("canonUpdateEvent", (event) => {
+    loadImages();
+});
+
+
 function getRandomDefault(str) {
     var sum = 0;
     for (let i = 0; i < str.length; i++) {
@@ -28,10 +42,12 @@ function loadFruits() {
 		
 		// outputs the card if it is valid
         if (valid) {
-			var card = '<div class="card" id="fruit-' + i + '">' + '<img src="../assets/images/fruits/' + f.image
-			.toLowerCase()
-			    + '" onerror="this.src=' + "'" + getRandomDefault(f.name) + "'" + ';" alt="' + f.title + '">'
-			card += '<h1 class="name">' + f.name + '</h1>';
+            var name = getCookie("language") != "english" ? f.name : f.english_name;
+            var imageName = f.canon_image || getCookie("showOnlyCanon") != "true" ? f.image.toLowerCase() : "invalid.png";
+			var card = '<div class="card" id="fruit-' + i + '"><a class="wiki-link"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#777777"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"/></svg></a>'
+			+ '<div class="img-container"><img id="fruit-' + i + '-img" src="../assets/images/fruits/' + imageName
+			+ '" onerror="this.src=' + "'" + getRandomDefault(f.name) + "'" + ';" alt="' + name + '"></div>'
+			card += '<h1 class="name" id="fruit-' + i + '-name">' + name + '</h1>';
 
             var type = f.subtype == "" ? f.type : f.subtype;
 
@@ -47,6 +63,14 @@ function loadFruits() {
             card += '</div>';
 			
             $("#encyclopedia").append(card);
+
+
+            var wikiUrl = f.wiki_override != "" ? f.wiki_override : "https://onepiece.fandom.com/wiki/" + f.name.replaceAll(" ", "_");
+            document.getElementById("fruit-" + i).addEventListener("click", function (e) {
+                e.preventDefault(); // Prevent default anchor behavior
+                openInNewTab(wikiUrl);
+            });
+
 			counter += 1;
 		}
     });
@@ -111,4 +135,24 @@ function getFilteredList() {
     });
 
     return filteredDevilFruits;
+}
+
+function loadNames() {
+    $.each(devilFruits, function(i,f) {
+        document.getElementById("fruit-" + i + "-name").innerHTML = getCookie("language") != "english" ? f.name : f.english_name;
+    });
+}
+
+function loadImages() {
+    $.each(devilFruits, function(i,f) {
+        if (f.canon_image || getCookie("showOnlyCanon") != "true") {
+            document.getElementById("fruit-" + i + "-img").src = "../assets/images/fruits/" + f.image.toLowerCase();
+        } else {
+            document.getElementById("fruit-" + i + "-img").src = "../assets/images/invalid.png";
+        }
+    });
+}
+
+function openInNewTab(url) {
+  window.open(url, '_blank').focus();
 }
