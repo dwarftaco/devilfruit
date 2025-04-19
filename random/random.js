@@ -1,6 +1,6 @@
 var devilFruits = [];
 
-$.getJSON("assets/fruits.json", function(json) {
+$.getJSON("../assets/fruits.json", function(json) {
     for(var i = 0; i < json.length; i++) {
     	devilFruits.push(json[i]);
 	}
@@ -48,7 +48,7 @@ function getFilteredList(exclusionList) {
 function randomDevilFruit() {
     var filteredDevilFruits = getFilteredList([document.getElementById("devil-fruit-name").innerHTML]);
     var randomDevilFruit = getRandomInt(filteredDevilFruits.length);
-    document.getElementById("devil-fruit-img").src = "assets/images/fruits/" + filteredDevilFruits[randomDevilFruit]
+    document.getElementById("devil-fruit-img").src = "../assets/images/fruits/" + filteredDevilFruits[randomDevilFruit]
     .image.toLowerCase();
     document.getElementById("devil-fruit-name").innerHTML = filteredDevilFruits[randomDevilFruit].name;
 

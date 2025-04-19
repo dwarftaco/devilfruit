@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>One Piece Devil Fruit Encyclopedia</title>
+        <title>Random One Piece Devil Fruit</title>
         <link rel="stylesheet" href="../main.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="view-transition" content="same-origin">
-        <meta name="description" content="The Complete One Piece Devil Fruit Encyclopedia">
-        <meta name="keywords" content="One Piece,devil fruits,devil fruit,encyclopedia,wiki,luffy,Monkey D Luffy">
-        <meta property="og:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io" />
-        <meta property="og:description" content="The Complete One Piece Devil Fruit Encyclopedia" />
+        <meta name="description" content="Generate a random One Piece devil fruit">
+        <meta name="keywords" content="One Piece,devil fruits,devil fruit,random,generate,generator,luffy,Monkey D Luffy">
+        <meta property="og:title" content="Random One Piece Devil Fruit | DevilFruit.io" />
+        <meta property="og:description" content="Generate a random One Piece devil fruit" />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://www.devilfruit.io/encyclopedia" />
+        <meta property="og:url" content="https://www.devilfruit.io/random" />
         <meta property="og:image" content="https://www.devilfruit.io/assets/images/logo.png" />
         <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io">
-        <meta name="twitter:description" content="The Complete One Piece Devil Fruit Encyclopedia">
+        <meta name="twitter:title" content="Random One Piece Devil Fruit | DevilFruit.io">
+        <meta name="twitter:description" content="Generate a random One Piece devil fruit">
         <meta name="twitter:image" content="https://www.devilfruit.io/assets/images/logo.png">
         <script src="../jquery.min.js"></script>
-        <script src="encyclopedia.js"></script>
+        <script src="random.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
         <link rel="apple-touch-icon" sizes="180x180" href="/../assets/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/../assets/favicon/favicon-32x32.png">
@@ -34,20 +36,19 @@
             <nav>
                 <ul>
                     <li><a href="/">Home</a></li>
-                    <li><a href="/random">Random</a></li>
-                    <li><a class="current" href="/encyclopedia">Encyclopedia</a></li>
+                    <li><a class="current" href="/random">Random</a></li>
+                    <li><a href="/encyclopedia">Encyclopedia</a></li>
                 </ul>
             </nav>
         </header>
         <main>
-            <section>
-                <h1>The Complete Devil Fruit Encyclopedia</h1>
-                <input type="text" id="myInput" onkeyup="filterFruits()" placeholder="Search...">
-                <div class="filter" onclick="filterFruits()">
+            <section class="transparent">
+                <h1>Claim your devil fruit</h1>
+                <div class="filter">
                     <div class="dropdown">
                         <button
                                 class="dropdown-button"><div class="label">Type</div><img
-                                src="../assets/images/arrow.svg"/></button>
+                                src="../assets/images/arrow.svg" alt="arrow"/></button>
                         <div class="dropdown-content">
                             <a class="dropdown-item">
                                 <input id="filter-type-paramecia" type="checkbox" checked="checked"/>
@@ -66,11 +67,11 @@
                     <div class="dropdown">
                         <button
                                 class="dropdown-button"><div class="label">Source</div><img
-                                src="../assets/images/arrow.svg"/></button>
+                                src="../assets/images/arrow.svg" alt="arrow"/></button>
                         <div class="dropdown-content">
                             <a class="dropdown-item">
-                                <input id="filter-source-canon" type="checkbox"/>
-                                <div class="checkbox-label">Canon Only</div>
+                                <input id="filter-source-canon" type="checkbox" checked="checked"/>
+                                <div class="checkbox-label">Canon</div>
                             </a>
                             <a class="dropdown-item">
                                 <input id="filter-source-spoiler" type="checkbox"/>
@@ -79,8 +80,13 @@
                         </div>
                     </div>
                 </div>
-                <p id="total-fruits"></p>
-                <div id="encyclopedia" class="encyclopedia"></div>
+                <button onclick="randomDevilFruit()">Take A Bite</button>
+                <div id="devil-fruit-card" class="card" style="display: none;">
+                    <img id="devil-fruit-img" onerror="this.src='../assets/images/unknown_0.svg'">
+                    <h1 id="devil-fruit-name"></h1>
+                    <h2 id="devil-fruit-type"></h2>
+                    <p id="devil-fruit-desc"></p>
+                </div>
             </section>
         </main>
         <footer>

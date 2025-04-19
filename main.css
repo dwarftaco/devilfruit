@@ -55,6 +55,7 @@ header .title {
     flex-direction: row;
     justify-items: center;
     align-items: center;
+    text-decoration: none;
 }
 
 header .title h1 {
@@ -85,11 +86,14 @@ nav ul {
     list-style: none;
     margin: 0;
     padding: 0;
+
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
 }
 
 nav li {
     display: inline-block;
-    margin-right: 20px;
 }
 
 nav li .current {
@@ -135,10 +139,6 @@ section button svg:hover {
     filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.15));
 }
 
-.impact {
-    background-color: var(--accent);
-}
-
 section h1 {
     text-align: center;
     /*font-size: 2em;*/
@@ -164,6 +164,36 @@ section p {
     text-align: center;
     /*font-size: 1.25em;*/
     line-height: 1.4;
+}
+
+.landing-link {
+    display: block;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    color: #FFFFFF;
+    text-decoration: none;
+    border-radius: 1rem;
+    padding: 2rem;
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.1));
+    transition: transform 0.2s ease;
+}
+
+.landing-link h1, .landing-link h2, .landing-link p {
+    color: white;
+}
+
+.landing-link:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(2px 4px 1px rgba(0, 0, 0, 0.2));
+}
+
+section .landing-link:nth-of-type(1) {
+    background: #5EBC5C;
+}
+
+section .landing-link:nth-of-type(2) {
+    background: #BC5C5C;
 }
 
 .filter {
