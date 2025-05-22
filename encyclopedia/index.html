@@ -1,121 +1,833 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>One Piece Devil Fruit Encyclopedia | DevilFruit.io</title>
-        <link rel="stylesheet" href="../main.css">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="view-transition" content="same-origin">
-        <meta name="description" content="Browse every known devil fruit in the One Piece universe with images, types, and more. Updated regularly.">
-        <meta name="keywords" content="One Piece,devil fruits,devil fruit,encyclopedia,wiki,luffy,Monkey D Luffy">
-        <meta property="og:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io" />
-        <meta property="og:description" content="Browse every known devil fruit in the One Piece universe with images, types, and more. Updated regularly." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devilfruit.io/encyclopedia/" />
-        <meta property="og:image" content="https://devilfruit.io/assets/images/logo.png" />
-        <meta name="twitter:card" content="summary">
-        <meta name="twitter:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io">
-        <meta name="twitter:description" content="Browse every known devil fruit in the One Piece universe with images, types, and more. Updated regularly.">
-        <meta name="twitter:image" content="https://devilfruit.io/assets/images/logo.png">
-        <script src="../jquery.min.js"></script>
-        <script src="../main.js"></script>
-        <script src="encyclopedia.js"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="/../assets/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/../assets/favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/../assets/favicon/favicon-16x16.png">
-        <link rel="manifest" href="/../site.webmanifest">
-        <link rel="canonical" href="https://devilfruit.io/encyclopedia/">
-    </head>
-    <body>
-        <header>
-            <a class="title" href="/">
-                <img src="../assets/images/logo.svg" alt="logo"/>
-                <h1>DevilFruit.io</h1>
-            </a>
-            <nav>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="/random">Random</a></li>
-                    <li><a class="current" href="/encyclopedia">Encyclopedia</a></li>
-                    <li>
-                        <button id="toggle-settings" onclick="toggleSettings();">
-                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="m387.69-100-15.23-121.85q-16.07-5.38-32.96-15.07-16.88-9.7-30.19-20.77L196.46-210l-92.3-160 97.61-73.77q-1.38-8.92-1.96-17.92-.58-9-.58-17.93 0-8.53.58-17.34t1.96-19.27L104.16-590l92.3-159.23 112.46 47.31q14.47-11.46 30.89-20.96t32.27-15.27L387.69-860h184.62l15.23 122.23q18 6.54 32.57 15.27 14.58 8.73 29.43 20.58l114-47.31L855.84-590l-99.15 74.92q2.15 9.69 2.35 18.12.19 8.42.19 16.96 0 8.15-.39 16.58-.38 8.42-2.76 19.27L854.46-370l-92.31 160-112.61-48.08q-14.85 11.85-30.31 20.96-15.46 9.12-31.69 14.89L572.31-100H387.69Zm92.77-260q49.92 0 84.96-35.04 35.04-35.04 35.04-84.96 0-49.92-35.04-84.96Q530.38-600 480.46-600q-50.54 0-85.27 35.04T360.46-480q0 49.92 34.73 84.96Q429.92-360 480.46-360Z"/></svg>
-                        </button>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <section>
-                <h1>The Complete Devil Fruit Encyclopedia</h1>
-                <input type="text" id="myInput" onkeyup="filterFruits()" placeholder="Search...">
-                <div class="filter" onclick="filterFruits()">
-                    <div class="dropdown">
-                        <button
-                                class="dropdown-button"><div class="label">Type</div><img
-                                src="../assets/images/arrow.svg"/></button>
-                        <div class="dropdown-content">
-                            <a class="dropdown-item">
-                                <input id="filter-type-paramecia" type="checkbox" checked="checked"/>
-                                <span class="checkbox-label">Paramecia</span>
-                            </a>
-                            <a class="dropdown-item">
-                                <input id="filter-type-zoan" type="checkbox" checked="checked"/>
-                                <span class="checkbox-label">Zoan</span>
-                            </a>
-                            <a class="dropdown-item">
-                                <input id="filter-type-logia" type="checkbox" checked="checked"/>
-                                <span class="checkbox-label">Logia</span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="dropdown">
-                        <button
-                                class="dropdown-button"><div class="label">Source</div><img
-                                src="../assets/images/arrow.svg"/></button>
-                        <div class="dropdown-content">
-                            <a class="dropdown-item">
-                                <input id="filter-source-canon" type="checkbox"/>
-                                <div class="checkbox-label">Canon Only</div>
-                            </a>
-                            <a class="dropdown-item">
-                                <input id="filter-source-spoiler" type="checkbox"/>
-                                <div class="checkbox-label">Spoiler</div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <p id="total-fruits"></p>
-                <div id="encyclopedia" class="encyclopedia"></div>
-            </section>
-        </main>
-        <div id="settings">
-            <div id="settings-header">
-                <h1>Settings</h1>
-                <button id="settings-close" onclick="toggleSettings();">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+<head>
+    <title>One Piece Devil Fruit Encyclopedia | DevilFruit.io</title>
+    <link rel="stylesheet" href="../main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="view-transition" content="same-origin">
+    <meta name="description"
+          content="Browse every known devil fruit in the One Piece universe with images, types, and more. Updated regularly.">
+    <meta name="keywords" content="One Piece,devil fruits,devil fruit,encyclopedia,wiki,luffy,Monkey D Luffy">
+    <meta property="og:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io"/>
+    <meta property="og:description"
+          content="Browse every known devil fruit in the One Piece universe with images, types, and more. Updated regularly."/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="https://devilfruit.io/encyclopedia/"/>
+    <meta property="og:image" content="https://devilfruit.io/assets/images/logo.png"/>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="One Piece Devil Fruit Encyclopedia | DevilFruit.io">
+    <meta name="twitter:description"
+          content="Browse every known devil fruit in the One Piece universe with images, types, and more. Updated regularly.">
+    <meta name="twitter:image" content="https://devilfruit.io/assets/images/logo.png">
+    <script src="../jquery.min.js"></script>
+    <script src="../main.js"></script>
+    <script src="encyclopedia.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/../assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/../assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/../assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/../site.webmanifest">
+    <link rel="canonical" href="https://devilfruit.io/encyclopedia/">
+</head>
+<body>
+<header>
+    <a class="title" href="/">
+        <img src="../assets/images/logo.svg" alt="logo"/>
+        <h1>DevilFruit.io</h1>
+    </a>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/random">Random</a></li>
+            <li><a class="current" href="/encyclopedia">Encyclopedia</a></li>
+            <li>
+                <button id="toggle-settings" onclick="toggleSettings();">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                         fill="#434343">
+                        <path d="m387.69-100-15.23-121.85q-16.07-5.38-32.96-15.07-16.88-9.7-30.19-20.77L196.46-210l-92.3-160 97.61-73.77q-1.38-8.92-1.96-17.92-.58-9-.58-17.93 0-8.53.58-17.34t1.96-19.27L104.16-590l92.3-159.23 112.46 47.31q14.47-11.46 30.89-20.96t32.27-15.27L387.69-860h184.62l15.23 122.23q18 6.54 32.57 15.27 14.58 8.73 29.43 20.58l114-47.31L855.84-590l-99.15 74.92q2.15 9.69 2.35 18.12.19 8.42.19 16.96 0 8.15-.39 16.58-.38 8.42-2.76 19.27L854.46-370l-92.31 160-112.61-48.08q-14.85 11.85-30.31 20.96-15.46 9.12-31.69 14.89L572.31-100H387.69Zm92.77-260q49.92 0 84.96-35.04 35.04-35.04 35.04-84.96 0-49.92-35.04-84.96Q530.38-600 480.46-600q-50.54 0-85.27 35.04T360.46-480q0 49.92 34.73 84.96Q429.92-360 480.46-360Z"/>
+                    </svg>
                 </button>
-            </div>
-            <div id="language">
-                <span>Devil fruit names:</span>
-                <div class="switch">
-                    <button id="settings-language-japanese" onClick="saveLanguageSetting('japanese');" class="selected">Japanese</button>
-                    <button id="settings-language-english" onClick="saveLanguageSetting('english');">English</button>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <section>
+        <h1>The Complete Devil Fruit Encyclopedia</h1>
+        <input type="text" id="myInput" onkeyup="filterFruits()" placeholder="Search...">
+        <div class="filter" onclick="filterFruits()">
+            <div class="dropdown">
+                <button
+                        class="dropdown-button">
+                    <div class="label">Type</div>
+                    <img
+                            src="../assets/images/arrow.svg"/></button>
+                <div class="dropdown-content">
+                    <a class="dropdown-item">
+                        <input id="filter-type-paramecia" type="checkbox" checked="checked"/>
+                        <span class="checkbox-label">Paramecia</span>
+                    </a>
+                    <a class="dropdown-item">
+                        <input id="filter-type-zoan" type="checkbox" checked="checked"/>
+                        <span class="checkbox-label">Zoan</span>
+                    </a>
+                    <a class="dropdown-item">
+                        <input id="filter-type-logia" type="checkbox" checked="checked"/>
+                        <span class="checkbox-label">Logia</span>
+                    </a>
                 </div>
             </div>
-            <div id="spoilers" class="checkbox">
-                <span>Show spoilers?</span>
-                <input id="settings-spoilers" type="checkbox" onclick="saveSpoilerSetting()"/>
+            <div class="dropdown">
+                <button
+                        class="dropdown-button">
+                    <div class="label">Source</div>
+                    <img
+                            src="../assets/images/arrow.svg"/></button>
+                <div class="dropdown-content">
+                    <a class="dropdown-item">
+                        <input id="filter-source-canon" type="checkbox"/>
+                        <div class="checkbox-label">Canon Only</div>
+                    </a>
+                    <a class="dropdown-item">
+                        <input id="filter-source-spoiler" type="checkbox"/>
+                        <div class="checkbox-label">Spoiler</div>
+                    </a>
+                </div>
             </div>
-            <div id="canon" class="checkbox">
-                <span>Show only canon images?</span>
-                <input id="settings-canon" type="checkbox" onclick="saveCanonSetting()"/>
-            </div>
-            <p>By adjusting these settings, you give your consent for your preferences to be stored in cookies, so we can remember your choices across visits</p>
         </div>
-        <footer>
-            <p>&#169; 2025 DevilFruit.io</p>
-        </footer>
-    </body>
+        <p id="total-fruits"></p>
+        <div id="encyclopedia" class="encyclopedia">
+            <div class="card" id="fruit-0" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-0-img" src="../assets/images/fruits/aro_aro_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Aro Aro no Mi"></div>
+                <h1 class="name" id="fruit-0-name">Aro Aro no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can produce and control vectorial arrows that can affect the motion of objects</p></div>
+            <div class="card" id="fruit-1" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-1-img" src="../assets/images/fruits/baku_baku_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Baku Baku no Mi"></div>
+                <h1 class="name" id="fruit-1-name">Baku Baku no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can eat anything and incorporate it into their body</p></div>
+            <div class="card" id="fruit-2" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-2-img" src="../assets/images/fruits/bara_bara_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Bara Bara no Mi"></div>
+                <h1 class="name" id="fruit-2-name">Bara Bara no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can split their body into pieces</p></div>
+            <div class="card" id="fruit-3" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-3-img" src="../assets/images/fruits/bari_bari_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Bari Bari no Mi"></div>
+                <h1 class="name" id="fruit-3-name">Bari Bari no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create an indestructible barrier</p></div>
+            <div class="card" id="fruit-4" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-4-img" src="../assets/images/unknown_1.svg"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Deka Deka no Mi"></div>
+                <h1 class="name" id="fruit-4-name">Deka Deka no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can become 10x their normal size</p></div>
+            <div class="card" id="fruit-5" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-5-img" src="../assets/images/fruits/doa_doa_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Doa Doa no Mi"></div>
+                <h1 class="name" id="fruit-5-name">Doa Doa no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create a door on anything they touch</p></div>
+            <div class="card" id="fruit-6" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-6-img" src="../assets/images/fruits/doku_doku_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Doku Doku no Mi"></div>
+                <h1 class="name" id="fruit-6-name">Doku Doku no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create and control different types of poison</p></div>
+            <div class="card" id="fruit-7" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-7-img" src="../assets/images/fruits/doru_doru_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Doru Doru no Mi"></div>
+                <h1 class="name" id="fruit-7-name">Doru Doru no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create and control large amounts of wax</p></div>
+            <div class="card" id="fruit-8" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-8-img" src="../assets/images/fruits/gasu_gasu_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Gasu Gasu no Mi"></div>
+                <h1 class="name" id="fruit-8-name">Gasu Gasu no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into gas at will</p></div>
+            <div class="card" id="fruit-9" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-9-img" src="../assets/images/fruits/gomu_gomu_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Gomu Gomu no Mi"></div>
+                <h1 class="name" id="fruit-9-name">Gomu Gomu no Mi</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Grants the user's body the properties of rubber</p></div>
+            <div class="card" id="fruit-10" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-10-img" src="../assets/images/fruits/goro_goro_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Goro Goro no Mi"></div>
+                <h1 class="name" id="fruit-10-name">Goro Goro no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into lightning at will</p></div>
+            <div class="card" id="fruit-11" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-11-img" src="../assets/images/fruits/gura_gura_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Gura Gura no Mi"></div>
+                <h1 class="name" id="fruit-11-name">Gura Gura no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create powerful earthquakes and vibrations</p></div>
+            <div class="card" id="fruit-12" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-12-img" src="../assets/images/fruits/hana_hana_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Hana Hana no Mi"></div>
+                <h1 class="name" id="fruit-12-name">Hana Hana no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can sprout parts of their body on surfaces</p></div>
+            <div class="card" id="fruit-13" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-13-img" src="../assets/images/fruits/hie_hie_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Hie Hie no Mi"></div>
+                <h1 class="name" id="fruit-13-name">Hie Hie no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into ice at will</p></div>
+            <div class="card" id="fruit-14" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-14-img" src="../assets/images/fruits/hito_hito_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Hito Hito no Mi"></div>
+                <h1 class="name" id="fruit-14-name">Hito Hito no Mi</h1>
+                <h2 class="type">Zoan</h2>
+                <p class="desc">Can transform into a human</p></div>
+            <div class="card" id="fruit-15" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-15-img" src="../assets/images/fruits/iba_iba_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Iba Iba no Mi"></div>
+                <h1 class="name" id="fruit-15-name">Iba Iba no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create invisble thorny vines that can wrap around themselves and other people</p>
+            </div>
+            <div class="card" id="fruit-16" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-16-img" src="../assets/images/unknown_1.svg"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Iku Iku no Mi"></div>
+                <h1 class="name" id="fruit-16-name">Iku Iku no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can increase the size of inanimate objects in their vicinity</p></div>
+            <div class="card" id="fruit-17" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-17-img" src="../assets/images/unknown_1.svg"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Inu Inu no Mi, Model: Cerberus"></div>
+                <h1 class="name" id="fruit-17-name">Inu Inu no Mi, Model: Cerberus</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a three-headed cerberus or cerberus hybrid at will</p></div>
+            <div class="card" id="fruit-18" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-18-img"
+                                                src="../assets/images/fruits/inu_inu_no_mi_model_okuchi_no_makami.png"
+                                                onerror="this.src='../assets/images/unknown_2.svg';"
+                                                alt="Inu Inu no Mi, Model: Okuchi no Makami"></div>
+                <h1 class="name" id="fruit-18-name">Inu Inu no Mi, Model: Okuchi no Makami</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into an ancient wolf deity or ancient wolf deity hybrid at will</p></div>
+            <div class="card" id="fruit-19" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-19-img" src="../assets/images/fruits/ito_ito_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Ito Ito no Mi"></div>
+                <h1 class="name" id="fruit-19-name">Ito Ito no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create powerful razor-sharp strings that they can manipulate</p></div>
+            <div class="card" id="fruit-20" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-20-img" src="../assets/images/unknown_1.svg"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Jake Jake no Mi"></div>
+                <h1 class="name" id="fruit-20-name">Jake Jake no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can become a wearable jacket that can control anyone who wears them</p></div>
+            <div class="card" id="fruit-21" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-21-img" src="../assets/images/fruits/jiki_jiki_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Jiki Jiki no Mi"></div>
+                <h1 class="name" id="fruit-21-name">Jiki Jiki no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create magnetic forces to attract, repel, and manipulate metal</p></div>
+            <div class="card" id="fruit-22" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-22-img" src="../assets/images/fruits/kage_kage_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Kage Kage no Mi"></div>
+                <h1 class="name" id="fruit-22-name">Kage Kage no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can manifest and control shadows of living creatues and create zombies</p></div>
+            <div class="card" id="fruit-23" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-23-img" src="../assets/images/fruits/magu_magu_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Magu Magu no Mi"></div>
+                <h1 class="name" id="fruit-23-name">Magu Magu no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into magma at will</p></div>
+            <div class="card" id="fruit-24" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-24-img" src="../assets/images/fruits/mane_mane_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Mane Mane no Mi"></div>
+                <h1 class="name" id="fruit-24-name">Mane Mane no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can transform themselves into a physical double of anyone they touch</p></div>
+            <div class="card" id="fruit-25" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-25-img" src="../assets/images/fruits/mera_mera_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Mera Mera no Mi"></div>
+                <h1 class="name" id="fruit-25-name">Mera Mera no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into fire at will</p></div>
+            <div class="card" id="fruit-26" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-26-img" src="../assets/images/fruits/mero_mero_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Mero Mero no Mi"></div>
+                <h1 class="name" id="fruit-26-name">Mero Mero no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can use love, lust, or adoration to transform opponents into stone</p></div>
+            <div class="card" id="fruit-27" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-27-img" src="../assets/images/fruits/mochi_mochi_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Mochi Mochi no Mi"></div>
+                <h1 class="name" id="fruit-27-name">Mochi Mochi no Mi</h1>
+                <h2 class="type">Special Paramecia</h2>
+                <p class="desc">Can create, control, and transform into mochi at will</p></div>
+            <div class="card" id="fruit-28" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-28-img" src="../assets/images/fruits/moku_moku_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Moku Moku no Mi"></div>
+                <h1 class="name" id="fruit-28-name">Moku Moku no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into smoke at will</p></div>
+            <div class="card" id="fruit-29" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-29-img" src="../assets/images/fruits/mori_mori_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Mori Mori no Mi"></div>
+                <h1 class="name" id="fruit-29-name">Mori Mori no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into flora at will</p></div>
+            <div class="card" id="fruit-30" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-30-img"
+                                                src="../assets/images/fruits/neko_neko_no_mi_model_leopard.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Neko Neko no Mi, Model: Leopard"></div>
+                <h1 class="name" id="fruit-30-name">Neko Neko no Mi, Model: Leopard</h1>
+                <h2 class="type">Zoan</h2>
+                <p class="desc">Can turn into a leopard or leopard hybrid at will</p></div>
+            <div class="card" id="fruit-31" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-31-img" src="../assets/images/fruits/nikyu_nikyu_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Nikyu Nikyu no Mi"></div>
+                <h1 class="name" id="fruit-31-name">Nikyu Nikyu no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can repel anything they touch with physical paws on the user's hand</p></div>
+            <div class="card" id="fruit-32" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-32-img" src="../assets/images/fruits/nomi_nomi_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Nomi Nomi no Mi"></div>
+                <h1 class="name" id="fruit-32-name">Nomi Nomi no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can expand their brain indefinitely with new knowledge</p></div>
+            <div class="card" id="fruit-33" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-33-img" src="../assets/images/fruits/ope_ope_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Ope Ope no Mi"></div>
+                <h1 class="name" id="fruit-33-name">Ope Ope no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can use surgery-related abilities in a spherical domain they emit</p></div>
+            <div class="card" id="fruit-34" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-34-img" src="../assets/images/fruits/pika_pika_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Pika Pika no Mi"></div>
+                <h1 class="name" id="fruit-34-name">Pika Pika no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into light at will</p></div>
+            <div class="card" id="fruit-35" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-35-img"
+                                                src="../assets/images/fruits/ryu_ryu_no_mi_model_brachiosaurus.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Ryu Ryu no Mi, Model: Brachiosaurus"></div>
+                <h1 class="name" id="fruit-35-name">Ryu Ryu no Mi, Model: Brachiosaurus</h1>
+                <h2 class="type">Ancient Zoan</h2>
+                <p class="desc">Can turn into a brachiosaurus or brachiosaurus at will</p></div>
+            <div class="card" id="fruit-36" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-36-img" src="../assets/images/unknown_3.svg"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Ryu Ryu no Mi, Model: Kirin"></div>
+                <h1 class="name" id="fruit-36-name">Ryu Ryu no Mi, Model: Kirin</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into an qilin or qilin hybrid at will that can put others to sleep and
+                    materialize their...</p></div>
+            <div class="card" id="fruit-37" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-37-img"
+                                                src="../assets/images/fruits/ryu_ryu_no_mi_model_pteranodon.png"
+                                                onerror="this.src='../assets/images/unknown_0.svg';"
+                                                alt="Ryu Ryu no Mi, Model: Pteranodon"></div>
+                <h1 class="name" id="fruit-37-name">Ryu Ryu no Mi, Model: Pteranodon</h1>
+                <h2 class="type">Ancient Zoan</h2>
+                <p class="desc">Can turn into a pteranodon or pteranodon hybrid at will</p></div>
+            <div class="card" id="fruit-38" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-38-img" src="../assets/images/unknown_3.svg"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Shiku Shiku no Mi"></div>
+                <h1 class="name" id="fruit-38-name">Shiku Shiku no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create diseases with various effects</p></div>
+            <div class="card" id="fruit-39" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-39-img" src="../assets/images/unknown_3.svg"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Shima Shima no Mi"></div>
+                <h1 class="name" id="fruit-39-name">Shima Shima no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can assimilate with any island and manipulate it freely</p></div>
+            <div class="card" id="fruit-40" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-40-img" src="../assets/images/fruits/smile.png"
+                                                onerror="this.src='../assets/images/unknown_2.svg';" alt="SMILE"></div>
+                <h1 class="name" id="fruit-40-name">SMILE</h1>
+                <h2 class="type">Artificial Zoan</h2>
+                <p class="desc">May grat the user a permanent partial animal form</p></div>
+            <div class="card" id="fruit-41" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-41-img" src="../assets/images/fruits/soru_soru_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Soru Soru no Mi"></div>
+                <h1 class="name" id="fruit-41-name">Soru Soru no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can extract and manipulate souls from others to increase their own strength and infuse
+                    them into ...</p></div>
+            <div class="card" id="fruit-42" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-42-img" src="../assets/images/fruits/sube_sube_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Sube Sube no Mi"></div>
+                <h1 class="name" id="fruit-42-name">Sube Sube no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can make their body smooth and slippery</p></div>
+            <div class="card" id="fruit-43" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-43-img" src="../assets/images/fruits/suna_suna_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Suna Suna no Mi"></div>
+                <h1 class="name" id="fruit-43-name">Suna Suna no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into sand at will</p></div>
+            <div class="card" id="fruit-44" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-44-img"
+                                                src="../assets/images/fruits/tori_tori_no_mi_model_phoenix.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Tori Tori no Mi, Model: Phoenix"></div>
+                <h1 class="name" id="fruit-44-name">Tori Tori no Mi, Model: Phoenix</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a phoenix or phoenix hybrid at will</p></div>
+            <div class="card" id="fruit-45" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-45-img" src="../assets/images/fruits/toshi_toshi_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Toshi Toshi no Mi"></div>
+                <h1 class="name" id="fruit-45-name">Toshi Toshi no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can temporarily transform themselves and others into alternate future versions of
+                    them</p></div>
+            <div class="card" id="fruit-46" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-46-img"
+                                                src="../assets/images/fruits/uo_uo_no_mi_model_seiryu.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Uo Uo no Mi, Model: Seiryu"></div>
+                <h1 class="name" id="fruit-46-name">Uo Uo no Mi, Model: Seiryu</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a dragon or dragon hybrid at will</p></div>
+            <div class="card" id="fruit-47" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-47-img"
+                                                src="../assets/images/fruits/ushi_ushi_no_mi_model_giraffe.png"
+                                                onerror="this.src='../assets/images/unknown_0.svg';"
+                                                alt="Ushi Ushi no Mi, Model: Giraffe"></div>
+                <h1 class="name" id="fruit-47-name">Ushi Ushi no Mi, Model: Giraffe</h1>
+                <h2 class="type">Zoan</h2>
+                <p class="desc">Can turn into a giraffe or giraffe hybrid at wil</p></div>
+            <div class="card" id="fruit-48" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-48-img" src="../assets/images/fruits/uta_uta_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Uta Uta no Mi"></div>
+                <h1 class="name" id="fruit-48-name">Uta Uta no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can transport the consciousness of those who hear their singing into a virtual space
+                    they control</p></div>
+            <div class="card" id="fruit-49" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-49-img" src="../assets/images/fruits/wara_wara_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Wara Wara no Mi"></div>
+                <h1 class="name" id="fruit-49-name">Wara Wara no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can create and manipulate straw</p></div>
+            <div class="card" id="fruit-50" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-50-img" src="../assets/images/fruits/yami_yami_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Yami Yami no Mi"></div>
+                <h1 class="name" id="fruit-50-name">Yami Yami no Mi</h1>
+                <h2 class="type">Logia</h2>
+                <p class="desc">Can create, control, and transform into darkness at will</p></div>
+            <div class="card" id="fruit-51" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-51-img" src="../assets/images/unknown_1.svg"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Yokai Yokai no Mi: Model Bakotsu"></div>
+                <h1 class="name" id="fruit-51-name">Yokai Yokai no Mi: Model Bakotsu</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a monstrous bakotsu or bakotsu hybrid at will</p></div>
+            <div class="card" id="fruit-52" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-52-img" src="../assets/images/unknown_1.svg"
+                                                onerror="this.src='../assets/images/unknown_1.svg';"
+                                                alt="Yokai Yokai no Mi: Model Fengxi"></div>
+                <h1 class="name" id="fruit-52-name">Yokai Yokai no Mi: Model Fengxi</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a monstrous fengxi or fengxi hybrid at will</p></div>
+            <div class="card" id="fruit-53" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-53-img" src="../assets/images/unknown_3.svg"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Yokai Yokai no Mi: Model Gyūki"></div>
+                <h1 class="name" id="fruit-53-name">Yokai Yokai no Mi: Model Gyūki</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a monstrous gyuki or gyuki hybrid at will</p></div>
+            <div class="card" id="fruit-54" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-54-img" src="../assets/images/unknown_0.svg"
+                                                onerror="this.src='../assets/images/unknown_0.svg';"
+                                                alt="Yokai Yokai no Mi: Model Itsumade"></div>
+                <h1 class="name" id="fruit-54-name">Yokai Yokai no Mi: Model Itsumade</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a monstrous itsumade or itsumade hybrid at will</p></div>
+            <div class="card" id="fruit-55" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-55-img" src="../assets/images/unknown_3.svg"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Yokai Yokai no Mi: Model Sandowāmu"></div>
+                <h1 class="name" id="fruit-55-name">Yokai Yokai no Mi: Model Sandowāmu</h1>
+                <h2 class="type">Mythical Zoan</h2>
+                <p class="desc">Can turn into a monstrous sandworm or sandworm hybrid at will</p></div>
+            <div class="card" id="fruit-56" style="display: flex;"><a class="wiki-link">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                     fill="#777777">
+                    <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h280v80H200v560h560v-280h80v280q0 33-23.5 56.5T760-120H200Zm188-212-56-56 372-372H560v-80h280v280h-80v-144L388-332Z"></path>
+                </svg>
+            </a>
+                <div class="img-container"><img id="fruit-56-img" src="../assets/images/fruits/yomi_yomi_no_mi.png"
+                                                onerror="this.src='../assets/images/unknown_3.svg';"
+                                                alt="Yomi Yomi no Mi"></div>
+                <h1 class="name" id="fruit-56-name">Yomi Yomi no Mi</h1>
+                <h2 class="type">Paramecia</h2>
+                <p class="desc">Can come back to live after dying once and gains soul-related abilities</p></div>
+        </div>
+    </section>
+</main>
+<div id="settings">
+    <div id="settings-header">
+        <h1>Settings</h1>
+        <button id="settings-close" onclick="toggleSettings();">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343">
+                <path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/>
+            </svg>
+        </button>
+    </div>
+    <div id="language">
+        <span>Devil fruit names:</span>
+        <div class="switch">
+            <button id="settings-language-japanese" onClick="saveLanguageSetting('japanese');" class="selected">
+                Japanese
+            </button>
+            <button id="settings-language-english" onClick="saveLanguageSetting('english');">English</button>
+        </div>
+    </div>
+    <div id="spoilers" class="checkbox">
+        <span>Show spoilers?</span>
+        <input id="settings-spoilers" type="checkbox" onclick="saveSpoilerSetting()"/>
+    </div>
+    <div id="canon" class="checkbox">
+        <span>Show only canon images?</span>
+        <input id="settings-canon" type="checkbox" onclick="saveCanonSetting()"/>
+    </div>
+    <p>By adjusting these settings, you give your consent for your preferences to be stored in cookies, so we can
+        remember your choices across visits</p>
+</div>
+<footer>
+    <p>&#169; 2025 DevilFruit.io</p>
+</footer>
+</body>
 </html>
