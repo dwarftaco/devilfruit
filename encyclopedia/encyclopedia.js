@@ -64,11 +64,17 @@ function loadFruits() {
 			
             $("#encyclopedia").append(card);
 
-
             var wikiUrl = f.wiki_override != "" ? f.wiki_override : "https://onepiece.fandom.com/wiki/" + f.name.replaceAll(" ", "_");
+            document.getElementById("fruit-" + i).getElementsByClassName("wiki-link")[0].addEventListener("click", function (e) {
+                e.preventDefault(); // Prevent default anchor behavior
+                e.stopPropagation();
+                e.cancelBubble = true;
+                openInNewTab(wikiUrl);
+            });
+
             document.getElementById("fruit-" + i).addEventListener("click", function (e) {
                 e.preventDefault(); // Prevent default anchor behavior
-                openInNewTab(wikiUrl);
+                window.location.href = "/encyclopedia/" + f.name.replaceAll(" ", "_").replaceAll(":", "_").replaceAll(",", "_").replaceAll("__", "_") + "/index.html";
             });
 
 			counter += 1;

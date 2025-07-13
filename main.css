@@ -119,6 +119,12 @@ nav li .current {
     width: 20px;
 }
 
+main {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 section {
     /* padding: 10px 40px; */
     margin: 3rem 2rem 1rem 2rem;
@@ -126,6 +132,39 @@ section {
     align-items: center;
     flex-direction: column;
     gap: 1.5rem;
+    width: 100%;
+}
+
+section.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 2rem;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #DDDDDD;
+    gap: 0.5rem;
+    max-width: 800px;
+}
+
+.main h1 {
+    font-size: 1.3rem;
+    color: #333333;
+    margin-bottom: 0.4rem;
+}
+
+.main h2 {
+    font-size: 1rem;
+    color: #777777;
+    font-weight: 500;
+}
+
+.main-controls {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 section button {
@@ -322,6 +361,12 @@ input[type=text], select {
 #devil-fruit-card {
     margin-top: 1rem;
     display: none;
+    cursor: default;
+}
+
+#devil-fruit-card:hover {
+    transform: none;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 #devil-fruit-img {
@@ -354,7 +399,6 @@ input[type=text], select {
 
 .encyclopedia .img-container {
     height: 100px;
-    height: 90px;
     display: flex;
     justify-items: center;
     align-items: center;
@@ -371,6 +415,13 @@ input[type=text], select {
     border: 1px solid #DDDDDD;
     max-width: 50%;
     min-width: 200px;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3);
 }
 
 .card h1 {
@@ -380,25 +431,49 @@ input[type=text], select {
 }
 
 .card h2 {
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #777777;
     font-weight: 500;
 }
 
-/*.card p {
-    font-size: 1rem;
-}*/
-
-.encyclopedia .card {
-    padding: 1rem 1rem 0.5rem 1rem;
+.card a {
+    color: var(--accent);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
-.wiki-link {
+.card a:hover {
+    transform: translateY(-1px);
+}
+
+.card button {
+    margin-top: 1rem;
+    background: white;
+    border: 3px solid var(--accent);
+    color: var(--accent);
+    font-weight: bold;
+}
+
+.encyclopedia .card {
+    padding: 1.5rem 1rem 0.5rem 1rem;
+}
+
+.card .wiki-link {
     align-self: flex-end;
     position: absolute;
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.wiki-link {
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
 
 .wiki-link:hover {
@@ -409,6 +484,95 @@ input[type=text], select {
     fill: #777777;
     height: 20px;
     width: 20px;
+}
+
+.main-controls .wiki-link {
+    position: relative;
+}
+
+.back-link {
+    align-self: flex-start;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.main-controls .back-link {
+    position: relative;
+}
+
+.back-link:hover {
+    transform: translateY(-1px);
+}
+
+.back-link > svg {
+    fill: #777777;
+    height: 20px;
+    width: 20px;
+}
+
+.pills {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.pill {
+    color: white;
+    background: #6B74BB;
+    border-radius: 1rem;
+    padding: 0.25rem 0.75rem;
+    font-weight: bold;
+    border: 2px solid transparent;
+    margin: 0;
+}
+
+.pill.zoan {
+    background: #BB6B6B;
+}
+
+.pill.mythical-zoan {
+    background: white;
+    border-color: #6B74BB;
+    color: #6B74BB;
+}
+
+.pill.ancient-zoan {
+    background: white;
+    border-color: #BB6B6B;
+    color: #BB6B6B;
+}
+
+.pill.paramecia {
+    background: #BB6B9C;
+}
+
+.pill.special-paramecia {
+    background: white;
+    border-color: #BB6B9C;
+    color: #BB6B9C;
+}
+
+.pill.logia {
+    background: 74BB6B;
+}
+
+.pill.canon {
+    background: #444444;
+    color: white;
+}
+
+.pill.non-canon {
+    background: white;
+    border-color: #444444;
+    color: #444444;
 }
 
 

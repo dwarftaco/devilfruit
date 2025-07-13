@@ -93,7 +93,13 @@ function loadImage() {
     }
 }
 
-function openWiki() {
-    var url = currentDevilFruit.wiki_override != "" ? currentDevilFruit.wiki_override : "https://onepiece.fandom.com/wiki/" + currentDevilFruit.name.replace(" ", "_");
+function openWiki(e) {
+    e.stopPropagation();
+    e.cancelBubble = true;
+    var url = currentDevilFruit.wiki_override != "" ? currentDevilFruit.wiki_override : "https://onepiece.fandom.com/wiki/" + currentDevilFruit.name.replaceAll(" ", "_");
     window.open(url, '_blank').focus();
+}
+
+function openPage() {
+    window.location.href = "/encyclopedia/" + currentDevilFruit.name.replaceAll(" ", "_").replaceAll(":", "_").replaceAll(",", "_").replaceAll("__", "_") + "/index.html";
 }
