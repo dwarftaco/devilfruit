@@ -561,7 +561,7 @@
     {
       "name": "Gunyo Gunyo no Mi",
       "english_name": "Glorp-Glorp Fruit",
-      "type": "Unknown",
+      "type": "Paramecia",
       "subtype": "",
       "canon": true,
       "spoiler": false,
@@ -862,7 +862,7 @@
       "english_name": "Dog-Dog Fruit, Model: Chihuahua",
       "type": "Zoan",
       "subtype": "Zoan",
-      "canon": false,
+      "canon": true,
       "spoiler": false,
       "canon_image": false,
       "image": "Inu_Inu_no_Mi_Model_Chihuahua.png",
@@ -2080,6 +2080,19 @@
       "description": "Allows the user to transform into a sea otter hybrid and a full sea otter at will"
     },
     {
+      "name": "Riba Riba no Mi",
+      "english_name": "Reverse-Reverse Fruit",
+      "type": "Paramecia",
+      "subtype": "",
+      "canon": false,
+      "spoiler": false,
+      "canon_image": false,
+      "image": "Riba_Riba_no_Mi.png",
+      "wiki_override": "",
+      "short_description": "Allows the user to reverse time around them",
+      "description": "Allows the user to reverse time around them but not themselves"
+    },
+    {
       "name": "Riki Riki no Mi",
       "english_name": "Strong-Strong Fruit",
       "type": "Paramecia",
@@ -2563,7 +2576,7 @@
     {
       "name": "Toro Toro no Mi",
       "english_name": "Liquid-Liquid Fruit",
-      "type": "Zoan",
+      "type": "Logia",
       "subtype": "",
       "canon": false,
       "spoiler": false,
