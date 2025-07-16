@@ -816,6 +816,11 @@
         <changefreq>monthly</changefreq>
     </url>
     <url>
+        <loc>https://devilfruit.io/encyclopedia/Riba_Riba_no_Mi/</loc>
+        <priority>0.6</priority>
+        <changefreq>monthly</changefreq>
+    </url>
+    <url>
         <loc>https://devilfruit.io/encyclopedia/Riki_Riki_no_Mi/</loc>
         <priority>0.6</priority>
         <changefreq>monthly</changefreq>
