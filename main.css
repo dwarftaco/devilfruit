@@ -513,6 +513,14 @@ input[type=text], select {
     width: 20px;
 }
 
+.main #devil-fruit-type {
+    display: none;
+}
+
+#devil-fruit-quote {
+    font-style: italic;
+}
+
 .pills {
     display: flex;
     flex-direction: row;
@@ -574,6 +582,61 @@ input[type=text], select {
     border-color: #444444;
     color: #444444;
 }
+
+.pill.unconfirmed {
+    background: white;
+    border-color: #444444;
+    border-style: dashed;
+    color: #444444;
+}
+
+.pill.awakened {
+  position: relative;
+  overflow: hidden;
+  background: #D4AF37;
+  animation: shimmer-gold-bg 7.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.pill.awakened::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 150%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer-gold-glow 7.5s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+@keyframes shimmer-gold-glow {
+  0% {
+    left: -150%;
+  }
+  15% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes shimmer-gold-bg {
+  0%, 15%, 100% {
+    background-color: #D4AF37;
+  }
+  10% {
+    background-color: #e0be57;
+  }
+}
+
+
 
 
 #total-fruits {
